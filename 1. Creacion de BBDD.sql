@@ -1,0 +1,14 @@
+
+/* Creación de la BBDD*/
+
+/*CREATE DATABASE SPRINGFIELD;*/
+
+CREATE DATABASE IF NOT EXISTS SPRINGFIELD;
+
+/* Borrar una BBDD */
+
+/* DROP DATABASE SPRINGFIELD;*/
+
+/* Ver contenido de la BBDD*/
+
+/* SHOW TABLES FROM SPRINGFIELD;*/
