@@ -1,0 +1,79 @@
+USE SPRINGFIELD;
+
+/*Mostrar todos los registros de la tabla indicada*/
+
+SELECT *
+FROM PERSONAJES;
+
+/*Mostrar (SELECT) todos los campos, excepto los de fecha.*/
+
+SELECT ID_PERSONAJE, DESC_PERSONAJE, ID_FAMILIA, ID_SEXO, ID_MATRIMONIO, ID_LUGAR_RESIDENCIA, ID_PROFESION, ID_LUGAR_PROFESION
+FROM PERSONAJES;
+
+/*Mostrar todos los campos diferentes (DISTINCT), quitando ID_PERSONAJE que es un campo único.*/
+
+SELECT DISTINCT DESC_PERSONAJE
+, ID_FAMILIA
+, ID_SEXO
+, ID_MATRIMONIO
+, ID_LUGAR_RESIDENCIA
+, ID_PROFESION
+, ID_LUGAR_PROFESION
+FROM PERSONAJES;
+
+/*Mostrar número (COUNT) total de registros y número total de registros diferentes.*/
+
+SELECT COUNT(DESC_PERSONAJE) TOTAL, COUNT(DISTINCT DESC_PERSONAJE) TOTAL_DISTINTOS
+FROM PERSONAJES;
+
+/*Mostrar cuantas veces apararece en la tabla DESC_PERSONAJE.*/
+
+SELECT DESC_PERSONAJE, COUNT(*) TOTAL
+FROM PERSONAJES
+GROUP BY DESC_PERSONAJE;
+
+/*Mostrar cuantas veces apararece en (GROUP BY) la tabla DESC_PERSONAJE ordenados (ORDER BY) por TOTAL de forma descendente (DESC).*/
+
+SELECT DESC_PERSONAJE, COUNT(*) TOTAL
+FROM PERSONAJES
+GROUP BY DESC_PERSONAJE
+ORDER BY TOTAL DESC; /*Si solo se pone ORDER BY lo que sea, el orden es ASC ascendente.
+
+/*Mostrar los registros que aparecen (HAVING) más de una vez en el campo DESC_PERSONAJE (registros duplicados,
+varias personas con el mismo nombre, por ejemplo).*/
+
+SELECT DESC_PERSONAJE, COUNT(*) TOTAL
+FROM PERSONAJES
+GROUP BY DESC_PERSONAJE
+HAVING COUNT(*)>1; También permite por el alias, HAVING TOTAL>1;
+
+/*Mostrar total de registros de los campos indicados*/
+
+SELECT COUNT(*) TOTAL
+, COUNT(DESC_PERSONAJE) TOTAL_PERSONAJE
+, COUNT(ID_FAMILIA) TOTAL_FAMILIA
+, COUNT(ID_SEXO) TOTAL_SEXO
+, COUNT(ID_MATRIMONIO) TOTAL_MATRIMONIO
+, COUNT(ID_LUGAR_RESIDENCIA) TOTAL_LUG_RESIDENCIA
+, COUNT(ID_PROFESION) TOTAL_PROFESION
+, COUNT(ID_LUGAR_PROFESION) TOTAL_LUG_PROFESION
+FROM PERSONAJES;
+
+/*Mostrar el total de familias diferentes.*/
+
+SELECT COUNT(*) TOTAL
+, COUNT(ID_FAMILIA) REGISTROS_FAMILIA
+, COUNT(DISTINCT ID_FAMILIA) FAMILIAS_DIFERENTES
+FROM PERSONAJES;
+
+/*Mostrar registros vacios (IS NULL) del campo ID_MATRIMONIO (no están casados)*/
+
+SELECT *
+FROM PERSONAJES 
+WHERE ID_MATRIMONIO IS NULL;
+
+/*Mostrar registros no vacios (IS NOT NULL) del campo ID_MATRIMONIO (están casados)*/
+
+SELECT * 
+FROM PERSONAJES 
+WHERE ID_MATRIMONIO IS NOT NULL;
