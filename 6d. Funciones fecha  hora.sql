@@ -1,0 +1,136 @@
+USE SPRINGFIELD;
+
+/* CURDATE(), CURTIME(),LOCALTIME(), NOW(), SYSDATE()
+*/
+
+SELECT CURDATE() FECHA;
+
+SELECT CURRENT_DATE() FECHA;
+
+SELECT CURTIME() HORA;
+
+SELECT CURRENT_TIME() HORA;
+
+SELECT CURRENT_TIMESTAMP(), LOCALTIME(), LOCALTIMESTAMP(), NOW(), SYSDATE();
+
+/* DATE(), DATE_FORMAT(), TIME_FORMAT(),
+La fecha indicada en los ejemplos, es la fecha de la primera emisión de los Simposons.*/
+
+SELECT DATE('1989-12-17');
+
+SELECT DATE('1989-12-17 20:30:15.000001'); /*Sólo muestra la fecha, no la hora.*/
+
+SELECT DATE('La fecha de la primera emisión fue 1989-12-17'); /*Devuelve nulo.*/
+
+SELECT DATE(NULL);
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%Y'); /*Devuelve el año con 4 cifras*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%y'); /*Devuelve el año con 2 cifras*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%M'); /*Devuelve el mes en el idioma del sistema*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%m'); /*Devuelve el mes en dos digitos*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%D'); /*Devuelve el día en formato string siguiendo el idiomam del sistema*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%d'); /*Devuelve el día en número*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%d/%m/%Y'); /*17/12/1989*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%D %M, %Y'); /*17th December, 1989*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%W'); /*Devuelve el día de la semana*/
+
+SELECT DATE_FORMAT('1989-12-17 20:30:15.000001','%w'); /*Devuelve el número del día de la semana, en inglés 0=Domingo, 6=Sábado*/
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%f'); /*Devvuelve los milisegundos*/
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%H'); /*Devvuelve las horas en formato 24 horas */
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%h'); /*Devvuelve las horas en formato 12 horas*/
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%r'); /*Devvuelve la fecha en formato doce horas, indicando AM o PM */
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%i'); /*Devvuelve los minutos */
+
+SELECT TIME_FORMAT('1989-12-17 20:30:15.000001','%T'); /*Devvuelve la hora sin microsegundos. */
+
+/* SECOND(), MINUTE(), HOUR(), DAY(), DAYOFMONTH(), DAYNAME(), DAYOFWEEK(), DAYOFYEAR()
+LAST_DAY()*, DAY(), WEEK(), WEEKDAY(), WEEKOFYEAR(), YEARWEEK(), MONTH(), MONTHNAME()
+QUARTER(), YEAR() */
+
+SELECT SECOND('1989-12-17 20:30:15.000001');
+
+SELECT MINUTE('1989-12-17 20:30:15.000001');
+
+SELECT HOUR('1989-12-17 20:30:15.000001');
+
+SELECT DAY('1989-12-17 20:30:15.000001'), DAYOFMONTH('1989-12-17 20:30:15.000001'), DAYNAME('1989-12-17 20:30:15.000001');
+
+SELECT DAYOFWEEK('1989-12-17 20:30:15.000001'), DAYOFYEAR('1989-12-17 20:30:15.000001');/*En este formato el Domingo devuelve 1*/
+
+SELECT LAST_DAY('1989-12-17 20:30:15.000001'); /*Devuelve el último día del mes de la fecha pasada como parámetro*/
+
+SELECT DAY('1989-12-17 20:30:15.000001');
+
+SELECT WEEK('1989-12-17 20:30:15.000001');
+
+SELECT WEEKDAY('1989-12-17 20:30:15.000001'), WEEKOFYEAR('1989-12-17 20:30:15.000001'), YEARWEEK('1989-12-17 20:30:15.000001',5);
+
+/*En el formato WEEKDAY, Lunes=0, Domingo=6*/
+
+SELECT MONTH('1989-12-17 20:30:15.000001'), MONTHNAME('1989-12-17 20:30:15.000001');
+
+SELECT QUARTER('1989-12-17 20:30:15.000001'); /*Devuelve el trimestre que corresponde*/
+
+SELECT YEAR('1989-12-17 20:30:15.000001');
+
+/* EXTRACT(), ADDDATE(), SUBDATE(), ADDTIME(), SUBTIME(), PERIOD_ADD(),
+MAKEDATE(), MAKETIME()
+*/
+
+SELECT EXTRACT(MICROSECOND FROM '1989-12-17 20:30:15.000001');
+
+SELECT EXTRACT(SECOND FROM '1989-12-17 20:30:15.000001');
+
+SELECT EXTRACT(MINUTE FROM '1989-12-17 20:30:15.000001'); /*De forma análoga para el resto de opciones*/
+
+SELECT '1989-12-17 20:30:15.000001' FECHA, ADDDATE('1989-12-17 20:30:15.000001', INTERVAL 4 MICROSECOND) FECHA2;
+
+SELECT '1989-12-17 20:30:15.000001' FECHA, ADDDATE('1989-12-17 20:30:15.000001', INTERVAL 4 SECOND) FECHA2; /*De forma análoga para resto de opciones*/
+
+SELECT '1989-12-17 20:30:15.000001' FECHA, SUBDATE('1989-12-17 20:30:15.000001', INTERVAL 4 MICROSECOND) FECHA2; /*Resta, igual para resto opciones*/
+
+SELECT '1989-12-17 20:30:15.000001' FECHA, ADDTIME('1989-12-17 20:30:15.000001', '0.000001') FECHA2;
+
+SELECT '1989-12-17 20:30:15.000001' FECHA, ADDTIME('1989-12-17 20:30:15.000001', '3:2:4.000001') FECHA2;
+
+/*Al poner los dos puntos, entiende 3 horas 2 minutos 4 segundos y con el punto los microsegundos
+SUBTIME funciona igual.*/
+
+SELECT PERIOD_ADD(198912,6), PERIOD_ADD(8912,6); /*En los dos casos devuelve en formato 4 digitos para el año.*/
+
+SELECT MAKEDATE(1989,351); /*Devuelve 1989-12-17*/
+
+SELECT MAKETIME(20,30,15); /*Devuelve 20:30:15*/
+
+/* DATEDIFF(), TIMEDIFF(), TO_DAYS(), FROM_DAYS()
+STR_TO_DATE(), SEC_TO_TIME(), TIME_TO_SEC() */
+
+SELECT DATEDIFF('1989-12-17 20:30:15.000001','2021-01-31 07:00:00.000001'), DATEDIFF('2021-01-31 07:00:00.000001','1989-12-17 20:30:15.000001');
+/*Devuelve la diferencia en días*/
+
+SELECT TIMEDIFF('1989-12-17 20:30:15.000001','1990-01-01 07:00:00.000001'), TIMEDIFF('1990-01-01 07:00:00.000001','1989-12-17 20:30:15.000001');
+/*Devuelve la diferencia en horas, minutos, segundos y microsegundos.
+El tope máximo que devuelve es 838:59:59.000000*/
+
+SELECT TO_DAYS('1989-12-17 20:30:15.000001');
+
+SELECT FROM_DAYS(726818);
+
+SELECT STR_TO_DATE('17/12/1989','%d/%m/%Y)');
+
+SELECT SEC_TO_TIME(1), TIME_TO_SEC('00:00:01')
+, SEC_TO_TIME(7001), TIME_TO_SEC('01:56:41')
+, SEC_TO_TIME(-70), TIME_TO_SEC('-00:01:10');
